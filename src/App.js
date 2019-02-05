@@ -10,7 +10,8 @@ class App extends React.Component {
       {id: 333, firstName: 'Ran', age: 5},
       {id: 444, firstName: 'Ken', age: 0}
     ],
-    lastName: 'Fernando'
+    lastName: 'Fernando',
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -29,16 +30,33 @@ class App extends React.Component {
     })
   }
 
+  togglePanelHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({
+      showPersons: !doesShow
+    })
+  }
+
   render() {
+    let personsWrap = null;
+
+    if(this.state.showPersons) {
+      personsWrap = (
+        <div>
+          {this.state.persons.map(person => {
+            return <Person name={person.firstName} age={person.age} surname={this.state.lastName} 
+                  /*switchName={() => this.switchNameHandler('Ferni')}
+                  changed={this.nameChangedHandler}*/ />
+            })
+          }
+        </div> )
+    }
+
     return (
       <div className="App">
-        <Person 
-        name={this.state.persons[0].firstName} 
-        surname={this.state.lastName} age={this.state.persons[0].age} 
-        switch={() => this.switchNameHandler('Ferni')}
-        changed={this.nameChangedHandler} />
         <input type="text" onChange={this.nameChangedHandler} value={this.state.persons[0].firstName} />
-        <button className="style-btn" onClick={this.switchNameHandler.bind(this, 'Jay')}>Switch Name</button>
+        <button className="style-btn" onClick={this.togglePanelHandler}>Toggle Persons</button>
+        {personsWrap}
       </div>
     );
   }
