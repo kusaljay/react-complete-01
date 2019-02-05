@@ -1,14 +1,13 @@
 import React from 'react';
-import './Person.css'; // Thanks Webpack :)
+import './Person.css'
 
-const person = props => {
+const Person = (props) => {
   return (
     <div className="Person">
-      <p onClick={props.click}>I'm {props.name} and I'm {props.age} years old.</p>
-      <p>{props.children}</p>
-      <input type="text" onChange={props.changed}  value={props.name}  />
+      {/*<input type="text" onChange={props.changed} value={props.name} />*/}
+      <p onClick={props.switch}>I'm {props.name} {props.surname} and {props.age} years old.</p>
     </div>
-  )
-};
+  );
+}
 
-export default person;
+export default Person;
