@@ -14,20 +14,25 @@ class App extends React.Component {
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    this.setState({
-      persons: [
-        {id: 111, firstName: newName, age: 38}
-      ]
-    })
-  }
+  nameChangedHandler = (event, personId) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === personId; // returns true
+    });
+    //console.log(personIndex);
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        {id: 111, firstName: event.target.value, age: 38}
-      ]
-    })
+    const personToUpdate = {...this.state.persons[personIndex]};
+    //console.log(personToUpdate);
+
+    personToUpdate.firstName = event.target.value;
+    //console.log(personToUpdate);
+
+    const personsUpdated = [...this.state.persons];
+    //console.log(personsUpdated);
+
+    personsUpdated[personIndex] = personToUpdate;
+    //console.log(personsUpdated);
+    
+    this.setState({persons: personsUpdated})
   }
 
   togglePanelHandler = () => {
@@ -37,16 +42,24 @@ class App extends React.Component {
     })
   }
 
+  deletePersonHandler = (personIndex) => {
+    //const personsAll = this.state.persons.slice(); // Fetch all persons
+    const personsAll = [...this.state.persons]; // Create a copy of state to update immutably
+    personsAll.splice(personIndex, 1);
+    this.setState({persons: personsAll});
+  }
+
   render() {
     let personsWrap = null;
 
     if(this.state.showPersons) {
       personsWrap = (
         <div>
-          {this.state.persons.map(person => {
-            return <Person name={person.firstName} age={person.age} surname={this.state.lastName} 
-                  /*switchName={() => this.switchNameHandler('Ferni')}
-                  changed={this.nameChangedHandler}*/ />
+          {this.state.persons.map((person, index) => {
+            return (
+              <Person name={person.firstName} age={person.age} surname={this.state.lastName} key={person.id}
+              clickDelete={() => this.deletePersonHandler(index)}
+              changed={(event) => this.nameChangedHandler(event, person.id)} /> )
             })
           }
         </div> )
@@ -54,7 +67,6 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <input type="text" onChange={this.nameChangedHandler} value={this.state.persons[0].firstName} />
         <button className="style-btn" onClick={this.togglePanelHandler}>Toggle Persons</button>
         {personsWrap}
       </div>
