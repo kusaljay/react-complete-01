@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Validation = (props) => {
+const validation = (props) => {
   return (
     <div>
       <p>{props.charLength >= 5 ? `Text long enough` : `Text too short`}</p>
@@ -9,4 +9,4 @@ const Validation = (props) => {
   
 }
 
-export default Validation;
+export default validation;

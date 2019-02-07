@@ -4,22 +4,49 @@ import Char from './Char/Char';
 
 class App extends React.Component {
   state = {
-    userInput: ''
+    userInput: '',
+    userInputArr: []
   }
 
-  charCountListener = (event) => {
+  charCountHandler = (event) => {
+    const charCount = event.target.value;
+    const charCountArr = charCount.split('');
+    //console.log(charCountArr);
     this.setState({
-      userInput: event.target.value
+      userInput: charCount,
+      userInputArr: charCountArr
     })
   }
 
+  deleteCharHandler = (charIndex) => {
+    const charsAllArr = [...this.state.userInputArr];
+    charsAllArr.splice(charIndex, 1);
+    //console.log(charsAllArr);
+    const charsAll = charsAllArr.join('');
+    //console.log(charsAll);
+    this.setState(
+      {
+        userInputArr: charsAllArr,
+        userInput: charsAll
+        }
+      );
+  }
+
   render() {
+    let characterSeries = null;
+ 
+    characterSeries = (
+      this.state.userInputArr.map((el, i) => {
+        return <Char key={i} text={el} delete={(i) => this.deleteCharHandler(i)} />
+      })
+    )
+
     return (
       <div>
-        <input type="text" onInput={this.charCountListener} />
-        <p>{this.state.userInput.length}</p>
+        <input type="text" onChange={this.charCountHandler} value={this.state.userInput}  />
+        <p>{this.state.userInput}<br />Character count: {this.state.userInput.length}</p>
         <Validation charLength={this.state.userInput.length} />
-        <Char />
+        {characterSeries}
       </div>
     );
   }

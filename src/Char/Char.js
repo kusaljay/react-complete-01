@@ -1,10 +1,10 @@
 import React from 'react';
 import './Char.css';
 
-const Char = () => {
+const Char = (props) => {
  return(
-    <div className="char">
-      
+    <div className="char" onClick={props.delete}>
+      {props.text}
     </div>
   )
 }
