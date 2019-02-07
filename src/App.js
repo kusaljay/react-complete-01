@@ -7,8 +7,10 @@ class App extends React.Component {
   }
 
   charCountListener = (event) => {
+    event.preventDefault();
     const charCount = [...this.state.userInput];
     charCount.push(event.target.value);
+    console.log(charCount);
 
     this.setState({
       userInput: charCount
@@ -18,9 +20,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <input type="text" onChange={this.charCountListener} />
+        <input type="text" onInput={this.charCountListener} />
         <p>{this.state.userInput.length}</p>
-        <Validation charLength={this.state.userInput.length}/>
+        <Validation charLength={this.state.userInput.length} />
       </div>
     );
   }
