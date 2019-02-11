@@ -1,4 +1,5 @@
 import React from 'react';
+import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 import './App.css';
 
@@ -50,6 +51,19 @@ class App extends React.Component {
   }
 
   render() {
+    const styleBtn = {
+      backgroundColor: 'rgb(72, 133, 237)',
+      font: 'inherit',
+      color: 'white',
+      border: 'none',
+      padding: '8px 10px',
+      cursor: 'pointer',
+      borderRadius: '3px', 
+      ':hover': {
+        backgroundColor: 'rgb(31, 107, 236)'
+      }
+    }
+
     let personsWrap = null;
 
     if(this.state.showPersons) {
@@ -62,16 +76,36 @@ class App extends React.Component {
               changed={(event) => this.nameChangedHandler(event, person.id)} /> )
             })
           }
-        </div> )
+        </div> );
+
+      styleBtn.backgroundColor = 'rgb(15, 157, 88)';
+      styleBtn[':hover'] = {
+        backgroundColor: 'rgb(11, 123, 69)'
+      }
+    }
+
+    let classes = [];
+    const personsLength = this.state.persons.length;
+
+    if(personsLength <= 2) {
+      classes.push('alert');
+      if(personsLength <= 1) {
+        classes.push('warn');
+      }
+      
+      classes = classes.join(' ');
     }
 
     return (
-      <div className="App">
-        <button className="style-btn" onClick={this.togglePanelHandler}>Toggle Persons</button>
-        {personsWrap}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <button style={styleBtn} onClick={this.togglePanelHandler}>Toggle Persons</button>
+          <p className={classes}>List of Persons</p>
+          {personsWrap}
+        </div>
+      </StyleRoot> 
     );
   }
 }
 
-export default App;
+export default Radium(App);
