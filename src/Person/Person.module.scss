@@ -1,0 +1,16 @@
+.person {
+  width: 60%;
+  margin: 20px auto;
+  padding: 20px;
+  border: solid 1px #bbb;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 767px) {
+    width: 90%;
+  }
+}
+
+.btn {
+  background-color: red;
+}
+
