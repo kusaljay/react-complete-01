@@ -1,6 +1,6 @@
 import React from 'react';
 // import Radium, {StyleRoot} from 'radium';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
 import './App.scss';
 
 class App extends React.Component {
@@ -57,13 +57,10 @@ class App extends React.Component {
     if(this.state.showPersons) {
       personsWrap = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person name={person.firstName} age={person.age} surname={this.state.lastName} key={person.id}
-              clickDelete={() => this.deletePersonHandler(index)}
-              changed={(event) => this.nameChangedHandler(event, person.id)} /> )
-            })
-          }
+          <Persons 
+            persons={this.state.persons}
+            deletePerson={this.deletePersonHandler}
+            nameChanged={this.nameChangedHandler} />
         </div> );
     }
 
