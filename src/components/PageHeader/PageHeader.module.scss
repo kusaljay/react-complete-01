@@ -1,0 +1,23 @@
+@import '../../assets/styles/partials/variables';
+
+.btn {
+  background-color: $bg_button;
+  font-family: inherit;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 3px; 
+  
+  &:hover {
+    background-color: rgb(31, 107, 236);
+  }
+}
+
+.warn {
+  color: red !important;
+}
+
+.alert {
+  color: orange;
+}

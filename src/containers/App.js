@@ -1,18 +1,32 @@
 import React from 'react';
 // import Radium, {StyleRoot} from 'radium';
+import PageHeader from '../components/PageHeader/PageHeader';
 import Persons from '../components/Persons/Persons';
 import './App.scss';
 
 class App extends React.Component {
-  state = {
-    persons: [
-      {id: 111, firstName: 'Kus', age: 38},
-      {id: 222, firstName: 'Sha', age: 37},
-      {id: 333, firstName: 'Ran', age: 5},
-      {id: 444, firstName: 'Ken', age: 0}
-    ],
-    lastName: 'Fernando',
-    showPersons: false
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    this.state = {
+      persons: [
+        {id: 111, firstName: 'Kus', age: 38},
+        {id: 222, firstName: 'Sha', age: 37},
+        {id: 333, firstName: 'Ran', age: 5},
+        {id: 444, firstName: 'Ken', age: 0}
+      ],
+      lastName: 'Fernando',
+      showPersons: false
+    }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
   }
 
   nameChangedHandler = (event, personId) => {
@@ -51,7 +65,7 @@ class App extends React.Component {
   }
 
   render() {
-
+    console.log('[App.js] render');
     let personsWrap = null;
 
     if(this.state.showPersons) {
@@ -64,23 +78,12 @@ class App extends React.Component {
         </div> );
     }
 
-    let classes = [];
-    const personsLength = this.state.persons.length;
-
-    if(personsLength <= 2) {
-      classes.push('alert');
-      if(personsLength <= 1) {
-        classes.push('warn');
-      }
-      
-      classes = classes.join(' ');
-    }
-
     return (
-      
         <div className="App">
-          <button className="btn" onClick={this.togglePanelHandler}>Toggle Persons</button>
-          <p className={classes}>List of Persons</p>
+          <PageHeader 
+            persons={this.state.persons}
+            toggle={this.togglePanelHandler}
+            title={this.props.appTitle} />
           {personsWrap}
         </div>
       
