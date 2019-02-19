@@ -29,6 +29,10 @@ class App extends React.Component {
     console.log('[App.js] componentDidMount');
   }
 
+  componentDidUpdate() {
+    
+  }
+
   nameChangedHandler = (event, personId) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === personId; // returns true
@@ -65,7 +69,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('[App.js] render');
+    console.log('[App.js] render method');
     let personsWrap = null;
 
     if(this.state.showPersons) {
