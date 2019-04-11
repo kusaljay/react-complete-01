@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import Person from '../Person/Person'
+import Person from '../Person/Person';
 
 class Persons extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {...this.props};
+    console.log(this.state);
+  }
+
   static getDerivedStateFromProps(props, state) {
     console.log('[Persons.js] getDerivedStateFromProps');
     return state;

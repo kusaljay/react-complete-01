@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './PageHeader.module.scss';
 
 const pageHeader = (props) => {
+  
+  useEffect(() => {
+    console.log('[PageHeader.js] with useEffect');
+  });
   
   let classes = [];
   const personsLength = props.persons.length;
