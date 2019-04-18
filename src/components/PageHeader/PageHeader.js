@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import styles from './PageHeader.module.scss';
+//import Aux from '../../hoc/Auxiliary';
 
 const pageHeader = (props) => {
   
@@ -20,11 +21,11 @@ const pageHeader = (props) => {
   }
 
   return (
-    <div>
+    <Fragment>
       <p>{props.title}</p>
       <button className={styles.btn} onClick={props.toggle}>Toggle Persons</button>
       <p className={classes}>List of Persons</p>
-    </div>
+    </Fragment>
   );
 }
 
